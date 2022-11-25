@@ -1,9 +1,16 @@
-import Link from "next/link";
 import { useReducer, useState } from "react";
 import { nanoid } from "nanoid";
 import { ImBin } from 'react-icons/im';
 
+//TODO: react -> next.js
+//TODO: make pretty :)
+//TODO: local storage (tasks are preserved even after refreshing the page)
+
+//originalitems is not being updated
+
 export default function Index() {
+    const [completeStatus, setCompleteStatus] = useState(false);
+
     const OriginalItems = [
         {id: `${nanoid()}`, action: 'Carve the pumpkin', isComplete: false},
         {id: `${nanoid()}`, action: 'Buy Candy', isComplete: false},
@@ -19,7 +26,6 @@ export default function Index() {
         dispatch({ type: "ADD", id: newId });
     }
     
-    //TODO: complete function should move item to completed page
     function reducer(state, action) {
         switch (action.type) {
         case 'ADD':
@@ -55,8 +61,10 @@ export default function Index() {
     return (
     <div>
         <h1>Todo</h1>
+        <button onClick={() => setCompleteStatus(false)}>Show Uncomplete</button>
+        <button onClick={() => setCompleteStatus(true)}>Show Complete</button>
 
-        {items.map((item) => (
+        {items.filter((item) => item.isComplete == completeStatus).map((item) => (
             <div key={item.id}>
                 <label>
                     <input type="checkbox" checked={item.isComplete} onChange={() => Completed(item)} />
@@ -73,9 +81,6 @@ export default function Index() {
             <input type="text" id="NewToDo" name="NewToDo"></input>
             <input type="submit" value="submit"></input>
         </form>
-
-        <br />
-        <Link href="/completed">Completed items</Link>
     </div>
     );
 }
