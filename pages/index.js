@@ -2,20 +2,31 @@ import { useReducer, useState } from "react";
 import { nanoid } from "nanoid";
 import { ImBin } from 'react-icons/im';
 
-//TODO: react -> next.js
 //TODO: make pretty :)
 //TODO: local storage (tasks are preserved even after refreshing the page)
 
-//originalitems is not being updated
+//originalItems is not being updated
 
 export default function Index() {
     const [completeStatus, setCompleteStatus] = useState(false);
 
     const OriginalItems = [
         {id: `${nanoid()}`, action: 'Carve the pumpkin', isComplete: false},
-        {id: `${nanoid()}`, action: 'Buy Candy', isComplete: false},
+        {id: `${nanoid()}`, action: 'Buy candy', isComplete: false},
         {id: `${nanoid()}`, action: 'Brainstorm costume ideas', isComplete: false}
     ];
+
+    const boxStyle = {
+        display: "flex",
+        justifyContent: "center",
+        flexFlow: "column wrap",
+        alignContent: "center",
+        alignItems: "center"
+    };
+
+    const separate = {
+        margin: "1% 8%"
+    };
 
     function onSubmit(event) {
         event.preventDefault();
@@ -59,24 +70,28 @@ export default function Index() {
     }
 
     return (
-    <div>
-        <h1>Todo</h1>
-        <button onClick={() => setCompleteStatus(false)}>Show Uncomplete</button>
-        <button onClick={() => setCompleteStatus(true)}>Show Complete</button>
+    <div style={boxStyle}>
+        <h1 style={separate}>Todo</h1>
 
-        {items.filter((item) => item.isComplete == completeStatus).map((item) => (
+        <div style={separate}>
+        <button onClick={() => setCompleteStatus(false)}>Show Uncomplete</button>
+        <button style={{marginLeft: "4px"}} onClick={() => setCompleteStatus(true)}>Show Complete</button>
+        </div>
+
+        <div style={separate}>
+        {items.filter((item) => item.isComplete === completeStatus).map((item) => (
             <div key={item.id}>
                 <label>
                     <input type="checkbox" checked={item.isComplete} onChange={() => Completed(item)} />
                     {item.action}
                 </label>
-                <button onClick={() => Deleted(item)}><ImBin /></button>
+                <button style={{marginLeft: "7px"}} onClick={() => Deleted(item)}><ImBin /></button>
             </div>
         ))}
+        </div>
 
-        Add items using the form below, remove items by clicking on them.
-        <form onSubmit={onSubmit}>
-            <label htmlFor="NewToDo">Enter the new todo here:</label>
+        <form style={separate} onSubmit={onSubmit}>
+            <label htmlFor="NewToDo">Enter new items here:</label>
             <br />
             <input type="text" id="NewToDo" name="NewToDo"></input>
             <input type="submit" value="submit"></input>
