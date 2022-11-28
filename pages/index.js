@@ -2,9 +2,6 @@ import { useReducer, useState } from "react";
 import { nanoid } from "nanoid";
 import { ImBin } from 'react-icons/im';
 
-//TODO: make pretty :)
-//TODO: local storage (tasks are preserved even after refreshing the page)
-
 //originalItems is not being updated
 
 export default function Index() {
@@ -15,18 +12,6 @@ export default function Index() {
         {id: `${nanoid()}`, action: 'Buy candy', isComplete: false},
         {id: `${nanoid()}`, action: 'Brainstorm costume ideas', isComplete: false}
     ];
-
-    const boxStyle = {
-        display: "flex",
-        justifyContent: "center",
-        flexFlow: "column wrap",
-        alignContent: "center",
-        alignItems: "center"
-    };
-
-    const separate = {
-        margin: "1% 8%"
-    };
 
     function onSubmit(event) {
         event.preventDefault();
@@ -70,31 +55,31 @@ export default function Index() {
     }
 
     return (
-    <div style={boxStyle}>
-        <h1 style={separate}>Todo</h1>
+    <div className="flex flex-col flex-wrap place-content-center items-center h-screen lg:h-3/6 lg:mt-12">
+        <h1 className="my-1 mx-3 text-2xl font-bold">Todo</h1>
 
-        <div style={separate}>
+        <div className="my-1 mx-3">
         <button onClick={() => setCompleteStatus(false)}>Show Uncomplete</button>
-        <button style={{marginLeft: "4px"}} onClick={() => setCompleteStatus(true)}>Show Complete</button>
+        <button className="ml-1" onClick={() => setCompleteStatus(true)}>Show Complete</button>
         </div>
 
-        <div style={separate}>
+        <div className="my-1 mx-3">
         {items.filter((item) => item.isComplete === completeStatus).map((item) => (
             <div key={item.id}>
                 <label>
-                    <input type="checkbox" checked={item.isComplete} onChange={() => Completed(item)} />
+                    <input className="mx-3" type="checkbox" checked={item.isComplete} onChange={() => Completed(item)} />
                     {item.action}
                 </label>
-                <button style={{marginLeft: "7px"}} onClick={() => Deleted(item)}><ImBin /></button>
+                <button className="ml-2 align-[-3px]" onClick={() => Deleted(item)}><ImBin /></button>
             </div>
         ))}
         </div>
 
-        <form style={separate} onSubmit={onSubmit}>
+        <form className="my-1 mx-3" onSubmit={onSubmit}>
             <label htmlFor="NewToDo">Enter new items here:</label>
             <br />
-            <input type="text" id="NewToDo" name="NewToDo"></input>
-            <input type="submit" value="submit"></input>
+            <input className="mt-1" type="text" id="NewToDo" name="NewToDo"></input>
+            <input className="ml-2" type="submit" value="submit"></input>
         </form>
     </div>
     );
