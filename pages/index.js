@@ -55,32 +55,34 @@ export default function Index() {
     }
 
     return (
-    <div className="flex flex-col flex-wrap place-content-center items-center h-screen lg:h-3/6 lg:mt-12">
-        <h1 className="my-1 mx-3 text-2xl font-bold">Todo</h1>
+    <div className="flex flex-col flex-wrap place-content-center items-center h-screen lg:h-3/6">
+        <div className="flex flex-col flex-wrap items-center h-max lg:mt-12 w-fit p-2  pt-6 pb-8 bg-neutral-900 rounded-3xl shadow-md shadow-orange-400/50">
+            <h1 className="mb-3 mx-3 text-3xl font-bold text-orange-500">Todo</h1>
 
-        <div className="my-1 mx-3">
-        <button onClick={() => setCompleteStatus(false)}>Show Uncomplete</button>
-        <button className="ml-1" onClick={() => setCompleteStatus(true)}>Show Complete</button>
-        </div>
-
-        <div className="my-1 mx-3">
-        {items.filter((item) => item.isComplete === completeStatus).map((item) => (
-            <div key={item.id}>
-                <label>
-                    <input className="mx-3" type="checkbox" checked={item.isComplete} onChange={() => Completed(item)} />
-                    {item.action}
-                </label>
-                <button className="ml-2 align-[-3px]" onClick={() => Deleted(item)}><ImBin /></button>
+            <div className="my-1 mx-3">
+            <button className="bg-amber-600 rounded-full px-2 py-0.5" onClick={() => setCompleteStatus(true)}>Show Complete</button>
+            <button className="ml-1 bg-amber-600 rounded-full px-2 py-0.5" onClick={() => setCompleteStatus(false)}>Show Uncomplete</button>
             </div>
-        ))}
-        </div>
 
-        <form className="my-1 mx-3" onSubmit={onSubmit}>
-            <label htmlFor="NewToDo">Enter new items here:</label>
-            <br />
-            <input className="mt-1" type="text" id="NewToDo" name="NewToDo"></input>
-            <input className="ml-2" type="submit" value="submit"></input>
-        </form>
+            <div className="my-1 mx-3">
+            {items.filter((item) => item.isComplete === completeStatus).map((item) => (
+                <div key={item.id}>
+                    <label>
+                        <input className="mx-3" type="checkbox" checked={item.isComplete} onChange={() => Completed(item)} />
+                        {item.action}
+                    </label>
+                    <button className="ml-2 align-[-3px]" onClick={() => Deleted(item)}><ImBin /></button>
+                </div>
+            ))}
+            </div>
+
+            <form className="my-1 mx-3" onSubmit={onSubmit}>
+                <label htmlFor="NewToDo">Enter new items here:</label>
+                <br />
+                <input className="mt-1" type="text" id="NewToDo" name="NewToDo"></input>
+                <input className="ml-2 align-top bg-amber-600 rounded-full px-2 py-0.5" type="submit" value="submit"></input>
+            </form>
+        </div>
     </div>
     );
 }
