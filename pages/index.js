@@ -60,8 +60,8 @@ export default function Index() {
             <h1 className="mb-3 mx-3 text-3xl font-bold text-orange-500">Todo</h1>
 
             <div className="my-1 mx-3">
-            <button className="bg-amber-600 rounded-full px-2 py-0.5" onClick={() => setCompleteStatus(true)}>Show Complete</button>
-            <button className="ml-1 bg-amber-600 rounded-full px-2 py-0.5" onClick={() => setCompleteStatus(false)}>Show Uncomplete</button>
+            <button className="bg-amber-600 rounded-full px-2 py-0.5 shadow-md focus:shadow-amber-600/50 hover:shadow-amber-600/50" onClick={() => setCompleteStatus(true)}>Show Complete</button>
+            <button className="ml-1 bg-amber-600 rounded-full px-2 py-0.5 shadow-md focus:shadow-amber-600/50 hover:shadow-amber-600/50" onClick={() => setCompleteStatus(false)}>Show Uncomplete</button>
             </div>
 
             <div className="my-1 mx-3">
@@ -80,7 +80,7 @@ export default function Index() {
                 <label htmlFor="NewToDo">Enter new items here:</label>
                 <br />
                 <input className="mt-1" type="text" id="NewToDo" name="NewToDo"></input>
-                <input className="ml-2 align-top bg-amber-600 rounded-full px-2 py-0.5" type="submit" value="submit"></input>
+                <input className="ml-2 align-top bg-amber-600 rounded-full px-2 py-0.5 shadow-md focus:shadow-amber-600/50 hover:shadow-amber-600/50" type="submit" value="submit"></input>
             </form>
         </div>
     </div>
